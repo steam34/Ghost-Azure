@@ -214,7 +214,6 @@ stages:
               ResourceGroupName: '$(ResourceGroup)'
               SlotName: '$(SlotNameStaging)'
               packageForLinux: '$(Pipeline.Workspace)\**\*.zip'
-              WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
           - task: AzureAppServiceManage@0
             displayName: 'Start Azure App Service'
             inputs:
