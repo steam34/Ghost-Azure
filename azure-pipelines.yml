@@ -217,7 +217,7 @@ stages:
               WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
               enableCustomDeployment: true
               DeploymentType: 'webDeploy'
-              RemoveAdditionalFilesFlag: true
+              ExcludeFilesFromAppDataFlag: false
           - task: AzureAppServiceManage@0
             displayName: 'Start Azure App Service'
             inputs:
