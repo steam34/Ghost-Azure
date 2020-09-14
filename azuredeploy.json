@@ -8,6 +8,9 @@
     "hostingPlanName": {
       "type": "string"
     },
+    "siteLocation": {
+      "type": "string"
+    },
     "sku": {
       "type": "string",
       "allowedValues": [
@@ -53,12 +56,10 @@
       "defaultValue": ""
     },
     "repoUrl": {
-      "type": "string",
-      "defaultValue": "https://github.com/<<PutYourGitHubUserHere>>/Ghost-Azure"
+      "type": "string"
     },
     "branch": {
-      "type": "string",
-      "defaultValue": "master"
+      "type": "string"
     }
   },
   "variables": {
@@ -70,7 +71,7 @@
     {
       "name": "[parameters('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('siteLocation')]",
       "apiVersion": "2018-02-01",
       "sku": {
         "name": "[variables('sku')]"
@@ -84,7 +85,7 @@
     {
       "name": "[parameters('siteName')]",
       "type": "Microsoft.Web/sites",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('siteLocation')]",
       "apiVersion": "2018-11-01",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
@@ -151,7 +152,7 @@
     {
       "name": "[variables('appInsightsName')]",
       "type": "Microsoft.Insights/components",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('siteLocation')]",
       "apiVersion": "2014-04-01",
       "condition": "[parameters('Deploy App Insights')]",
       "dependsOn": [
